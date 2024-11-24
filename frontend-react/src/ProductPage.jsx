@@ -8,8 +8,9 @@ function ProductsPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        const response = await axios.get('/books.json');
         // const response = await axios.get('/products.json');
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
+        // const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
         // const response = await axios.get(`http://localhost:3000/api/products`);
         setProducts(response.data);
       } catch (error) {
@@ -22,17 +23,17 @@ function ProductsPage() {
 
   return (
     <div className="container my-5">
-      <h1 className="text-center mb-4">Our Products</h1>
+      <h1 className="text-center mb-4">Books Catalogue</h1>
       <div className="row">
           {products.map(product => (
             <div key={product.id} className="col-md-4 mb-4">
               <ProductCard
                 id={product.id}
                 imageUrl={product.image}
-                productName={product.name}
-                price={product.price.toFixed(2)}
-                description={product.description}
-                category={product.category}
+                productName={product.bookTitle}
+                price={product.priceTag.toFixed(2)}
+                description={product.isbn_13}
+                category={product.format}
               />
             </div>
           ))}

@@ -22,8 +22,10 @@ Module 8: **Modern Frameworks for Software Development**
 * database-mysql directory
 : schema.sql
 : data.sql
-: ecommerce-EER-diagram.png
-: database-ecommerce-EER-diagram.mwb
+: m8-bookstore-ER-diagram.png
+: m8-bookstore-LS-diagram.png
+: mysql-bookstore-EER-diagram.png
+: database-bookstore-EER-diagram.mwb
 
 >>> Vite+React Framework
 * frontend-react directory
@@ -40,8 +42,11 @@ Module 8: **Modern Frameworks for Software Development**
 
 > public Folder (public)
 : vite.svg
-: featured.json
-: products.json
+: bells_icon.ico
+: bestsellers.json
+: books.json
+: authors.json
+: publishers.json
 
 > src Folder (source code)
 : App.css
@@ -64,9 +69,9 @@ Module 8: **Modern Frameworks for Software Development**
 > assets sub-folder (assets)
 : react.svg
 
-> html-css-bootstrap Folder
-: index.html
-: styles.css
+> startbootstrap Folder
+* startbootstrap-shop-homepage-gh-pages
+* startbootstrap-shop-item-gh-pages
 
 >>> NodeJS/Express Framework
 * backend-express directory

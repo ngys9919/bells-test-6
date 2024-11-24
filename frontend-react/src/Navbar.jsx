@@ -13,7 +13,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <Link href="/" className="navbar-brand">E-Shop</Link>
+        <Link href="/" className="navbar-brand">e-BookStore</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -30,7 +30,7 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <Link href="/products" className={`nav-link ${location === '/products' ? 'active' : ''}`}>
-                Products
+                Books
               </Link>
             </li>
             <li className="nav-item">
