@@ -22,10 +22,10 @@ Module 8: **Modern Frameworks for Software Development**
 * database-mysql directory
 : schema.sql
 : data.sql
-: m8-bookstore-ER-diagram.png
-: m8-bookstore-LS-diagram.png
-: mysql-bookstore-EER-diagram.png
-: database-bookstore-EER-diagram.mwb
+: m8-ebookstore-ER-diagram.png
+: m8-ebookstore-LS-diagram.png
+: mysql-ebookstore-EER-diagram.png
+: database-ebookstore-EER-diagram.mwb
 
 >>> Vite+React Framework
 * frontend-react directory

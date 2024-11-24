@@ -8,9 +8,9 @@ function ProductsPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('/books.json');
+        // const response = await axios.get('/books.json');
         // const response = await axios.get('/products.json');
-        // const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
         // const response = await axios.get(`http://localhost:3000/api/products`);
         setProducts(response.data);
       } catch (error) {

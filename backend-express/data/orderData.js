@@ -39,11 +39,11 @@ async function getOrderDetails(orderId) {
     const [rows] = await pool.query(`
         SELECT
             oi.product_id,
-            p.name,
-            p.price,
+            p.bookTitle,
+            p.priceTag,
             oi.quantity
         FROM order_items AS oi
-        JOIN products AS p ON oi.product_id = p.id
+        JOIN books AS p ON oi.product_id = p.id
         WHERE oi.order_id = ?
     `, [orderId]);
 

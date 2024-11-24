@@ -1,7 +1,7 @@
--- SQL Schema for bookstore
-CREATE DATABASE bookstore;
+-- SQL Schema for ebookstore
+CREATE DATABASE ebookstore;
 
-USE bookstore;
+USE ebookstore;
 
 -- Authors table
 CREATE TABLE authors (
@@ -69,10 +69,10 @@ CREATE TABLE user_marketing_preferences (
 CREATE TABLE cart_items (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  book_id INT NOT NULL,
+  product_id INT NOT NULL,
   quantity INT NOT NULL DEFAULT 1,
   FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (book_id) REFERENCES books(id)
+  FOREIGN KEY (product_id) REFERENCES books(id)
 );
 
 -- Orders table
@@ -90,8 +90,8 @@ CREATE TABLE orders (
 CREATE TABLE order_items (
   id INT AUTO_INCREMENT PRIMARY KEY,
   order_id INT NOT NULL,
-  book_id INT NOT NULL,
+  product_id INT NOT NULL,
   quantity INT NOT NULL DEFAULT 1,
   FOREIGN KEY (order_id) REFERENCES orders(id),
-  FOREIGN KEY (book_id) REFERENCES books(id)
+  FOREIGN KEY (product_id) REFERENCES books(id)
 );

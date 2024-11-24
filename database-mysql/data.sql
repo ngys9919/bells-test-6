@@ -1,4 +1,4 @@
-use bookstore;
+use ebookstore;
 
 INSERT INTO authors (firstName, lastName) VALUES
 ('Thomas', 'More'),
