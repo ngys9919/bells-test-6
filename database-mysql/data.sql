@@ -1,14 +1,10 @@
-use scjt_bookstore;
+use ecommerce;
 
-INSERT INTO authors (name)
-VALUES ('Thomas More'), 
-	   ('Jane Austen'), 
-       ('Lincoln Child'), 
-       ('George Eliot');
+INSERT INTO products (name, price, image) VALUES
+('Sleek Smartwatch', 199.99, 'https://picsum.photos/id/20/300/200'),
+('Wireless Earbuds', 79.99, 'https://picsum.photos/id/1/300/200'),
+('Portable Power Bank', 49.99, 'https://picsum.photos/id/26/300/200'),
+('HD Action Camera', 129.99, 'https://picsum.photos/id/96/300/200');
 
-INSERT INTO books (name, published_year, author_id)
-VALUES ('Utopia', 1516, 1),
-('Pride and Prejudice', 1813, 2),
-('Utopia', 2002, 3),
-('Silas Marner', 2005, 4),
-('Test Book', NULL, 3);
+INSERT INTO marketing_preferences (id, preference) VALUES (1, 'email');  -- Email Marketing
+INSERT INTO marketing_preferences (id, preference) VALUES (2, 'sms');    -- SMS Marketing

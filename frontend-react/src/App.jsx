@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect } from 'react';
+import Navbar from './Navbar';
+import HomePage from './HomePage';
+import ProductPage from './ProductPage';
+import RegisterPage from './RegisterPage';
+import ShoppingCart from './ShoppingCart';
+import { Route, Switch } from 'wouter';
+import { useFlashMessage } from './FlashMessageStore';
+// make sure to import `UserLogin.jsx` after the other imports
+import UserLogin from "./UserLogin";
+import './styles.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { getMessage, clearMessage  } = useFlashMessage();
+  const flashMessage = getMessage();
+
+  useEffect(() => {
+
+    const timer = setTimeout(() => {
+      clearMessage();
+    }
+    , 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }
+  , [flashMessage]);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* Navbar (not shown) */}
+      <Navbar />
+      {flashMessage.message && (
+        <div className={`alert alert-${flashMessage.type} text-center flash-alert`} role="alert">
+          {flashMessage.message}
+        </div>
+      )}
+
+      <Switch>
+        <Route path="/" component={HomePage} />
+        <Route path="/products" component={ProductPage} />
+        <Route path="/register" component={RegisterPage} />
+        <Route path="/login" component={UserLogin} />
+        <Route path="/cart" component={ShoppingCart} />
+      </Switch>
+
+      <footer className="bg-dark text-white text-center py-3">
+        <div className="container">
+          <p>&copy; 2023 E-Shop. All rights reserved.</p>
+        </div>
+      </footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
