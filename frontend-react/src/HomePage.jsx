@@ -51,16 +51,18 @@ function HomePage() {
   return (
     <>
 
-      <header className="bg-primary text-white text-center py-5">
-        <div className="container">
-          <h1 className="display-4">Hello, {loginUsername}! <br></br> Welcome to e-BookStore</h1>
-          <p className="lead">Find your favourite titles at wholesale prices!</p>
-          {/* <a href="/products" className="btn btn-light btn-lg">Shop Now</a> */}
-          <Link href="/products" className="btn btn-light btn-lg">
+      {/* Header */}
+<header className="bg-dark py-5">
+    <div className="container px-4 px-lg-5 my-5">
+        <div className="text-center text-white">
+            <h1 className="display-4 fw-bolder">Hello, {loginUsername}! <br></br> Welcome to e-BookStore</h1>
+            <p className="lead fw-normal text-white-50 mb-0">Find your favourite titles at wholesale prices!</p>
+            <Link href="/products" className="btn btn-light btn-lg">
             Shop Now
           </Link>
         </div>
-      </header>
+    </div>
+</header>
 
       <main className="container my-5">
         <h2 className="text-center mb-4">Best-Seller Books</h2>

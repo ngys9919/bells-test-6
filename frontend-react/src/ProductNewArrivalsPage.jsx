@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
 
-function ProductsPage() {
+function ProductsNewArrivalsPage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('/books.json');
+        const response = await axios.get('/books_newarrivals.json');
         // const response = await axios.get('/products.json');
         // const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
         // const response = await axios.get(`http://localhost:3000/api/products`);
@@ -23,7 +23,7 @@ function ProductsPage() {
 
   return (
     <div className="container my-5">
-      <h1 className="text-center mb-4">All Products</h1>
+      <h1 className="text-center mb-4">New Arrivals</h1>
       <div className="row">
           {products.map(product => (
             <div key={product.id} className="col-md-4 mb-4">
@@ -42,4 +42,4 @@ function ProductsPage() {
   );
 }
 
-export default ProductsPage;
+export default ProductsNewArrivalsPage;
