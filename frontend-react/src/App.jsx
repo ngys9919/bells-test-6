@@ -8,6 +8,7 @@ import { Route, Switch } from 'wouter';
 import { useFlashMessage } from './FlashMessageStore';
 // make sure to import `UserLogin.jsx` after the other imports
 import UserLogin from "./UserLogin";
+import UserLogout from "./UserLogout";
 import './styles.css';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path="/products" component={ProductPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/login" component={UserLogin} />
+        <Route path="/logout" component={UserLogout} />
         <Route path="/cart" component={ShoppingCart} />
       </Switch>
 
