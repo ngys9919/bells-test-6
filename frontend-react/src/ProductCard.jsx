@@ -1,7 +1,8 @@
 import React from 'react';
 import { useCart } from './CartStore';
-import { useLocation } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { useFlashMessage } from './FlashMessageStore';
+import { useLoginUsername } from './UserStore';
 
 const ProductCard = (props) => {
 
@@ -9,10 +10,21 @@ const ProductCard = (props) => {
   const [, setLocation] = useLocation();
   const { showMessage } = useFlashMessage();
 
+  const { getLoginUsername } = useLoginUsername();
+
+  const loginUsername = getLoginUsername();
+
   const handleAddToCart = () => {
-    addToCart(props);
-    showMessage('Item added to cart', 'success');
-    setLocation('/cart');
+    if ((loginUsername === "Guest") || (loginUsername === "null")) {
+      showMessage('Please login first!', 'info');
+      setLocation('/login');
+      // <Link href="/login"></Link>
+    } else {
+      addToCart(props);
+      showMessage('Item added to cart', 'success');
+      setLocation('/cart');
+      // <Link href="/cart"></Link>
+    }    
   }
 
   const renderProductPromotion = (promotion) => {

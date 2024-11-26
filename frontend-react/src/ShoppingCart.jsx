@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useCart } from './CartStore';
 import { useJwt } from './UserStore';
+import { useFlashMessage } from './FlashMessageStore';
 import axios from 'axios';
 
 const ShoppingCart = () => {
   const { cart, getCartTotal, modifyQuantity, removeFromCart, setCartContent } = useCart();
+
+  const { showMessage } = useFlashMessage();
 
   const { getJwt } = useJwt();
   
@@ -26,6 +29,7 @@ const ShoppingCart = () => {
       window.location = `${sessionUrl}`;
     } catch (error) {
       console.error('Error during checkout:', error);
+      showMessage('Error during checkout!', 'error');
     }
   };
 
@@ -40,8 +44,10 @@ const ShoppingCart = () => {
       });
       console.log('Cart:', response.data);
       setCartContent(response.data);
+
     } catch (error) {
       console.error('Error fetching cart:', error);
+      showMessage('Error fetching cart!', 'error');
     }
   };
 
@@ -67,6 +73,7 @@ const ShoppingCart = () => {
       });
     } catch (error) {
       console.error('Error updating cart:', error);
+      showMessage('Error updating cart!', 'error');      
     } finally {
       setIsUpdating(false);
     }

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
+import { useFlashMessage } from './FlashMessageStore';
 
 function ProductsNewArrivalsPage() {
+  const { showMessage } = useFlashMessage();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -15,6 +17,7 @@ function ProductsNewArrivalsPage() {
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
+        showMessage('Error fetching products!', 'error');
       }
     };
   

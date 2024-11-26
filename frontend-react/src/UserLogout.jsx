@@ -1,24 +1,35 @@
 import React from 'react';
-import { useLoginUsername } from './UserStore';
+import { useLoginUsername, usePreviousLoginUser } from './UserStore';
+import { useCart } from './CartStore';
 
 function UserLogout() {
 
-    const { getLoginUsername } = useLoginUsername();
+    const { resetCartContent } = useCart();
 
-    const loginUsername = getLoginUsername();
+    const { setLoginUsername } = useLoginUsername();
 
-    document.getElementById("loginlogout").innerHTML = "Login";
+    const { getPreviousLoginUser } = usePreviousLoginUser();
+
+    const previousLoginUser = getPreviousLoginUser();
+
+    const y = document.getElementById("loginlogout");
+    if (y)
+        y.innerHTML = "Login";
 
     return (
+        <>
         <div className="container mt-5">
             <h2>Logout</h2>
+        </div>
             <header className="bg-primary text-white text-center py-5">
-                <div className="container">
-                    <h1 className="display-4">Bye, {loginUsername}! <br></br> Thank you for visiting e-BookStore</h1>
+                <div className="container px-4 px-lg-5 my-5">
+                    <h1 className="display-4">Bye, {previousLoginUser}! <br></br> Thank you for visiting e-BookStore</h1>
                     <a href="/login" className="btn btn-light btn-lg">Re-login again!</a>
+                    {setLoginUsername("Guest")}
+                    {resetCartContent([])}
                 </div>
             </header>
-        </div>
+        </>
   );
 }
 

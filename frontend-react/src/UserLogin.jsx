@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useLocation } from 'wouter';
 import { useFlashMessage } from './FlashMessageStore';
-import { useJwt, useLoginUsername } from './UserStore';
+import { useJwt, useLoginUsername, usePreviousLoginUser } from './UserStore';
 
 function UserLogin() {
 
@@ -12,6 +12,7 @@ function UserLogin() {
   const { showMessage } = useFlashMessage();
   const { setJwt } = useJwt();
   const { setLoginUsername } = useLoginUsername();
+  const { setPreviousLoginUser } = usePreviousLoginUser();
 
   const initialValues = {
     email: '',
@@ -35,9 +36,11 @@ function UserLogin() {
       document.getElementById("loginlogout").innerHTML = "Logout";
       console.log(response.data.username);
       setLoginUsername(response.data.username);
+      setPreviousLoginUser(response.data.username);
       setLocation('/');
     } catch (error) {
       console.error('Login error:', error);
+      showMessage('Login error!', 'error');
       document.getElementById("loginlogout").innerHTML = "Login";
       actions.setErrors({ submit: error.response.data.message });      
       actions.setSubmitting(false);

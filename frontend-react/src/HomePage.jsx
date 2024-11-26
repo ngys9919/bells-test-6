@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
 import { useLoginUsername } from './UserStore';
+import { useFlashMessage } from './FlashMessageStore';
 import { Link } from 'wouter';
 
 import reactLogo from './assets/react.svg'
@@ -9,6 +10,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function HomePage() {
+  const { showMessage } = useFlashMessage();
 
   const { getLoginUsername } = useLoginUsername();
 
@@ -25,6 +27,7 @@ function HomePage() {
         setFeaturedProducts(response.data);
       } catch (error) {
         console.error('Error fetching featured products:', error);
+        showMessage('Error fetching featured products!', 'error');
       }
     };
 
@@ -59,7 +62,7 @@ function HomePage() {
 <header className="bg-dark py-5">
     <div className="container px-4 px-lg-5 my-5">
         <div className="text-center text-white">
-            <h1 className="display-4 fw-bolder">Hello, {loginUsername}! <br></br> Welcome to e-BookStore</h1>
+            <h1 className="display-4 fw-bolder">Hi, {loginUsername}! <br></br> Welcome to e-BookStore</h1>
             <p className="lead fw-normal text-white-50 mb-0">Find your favourite titles at wholesale prices!</p>
           <Link href="/products" className="btn btn-light btn-lg">
             Shop Now

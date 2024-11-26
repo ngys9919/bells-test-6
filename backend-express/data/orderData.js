@@ -11,7 +11,20 @@ async function createOrder(userId, orderItems) {
         await connection.beginTransaction();
 
         // Calculate total order amount
-        const total = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        // const total = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        let current = 0; 
+        let reducer = function(sum, item) {
+          const price = item.price;
+          const discount = item.price * (1 - item.discount);
+          if (discount === price) {
+            current = item.price * item.quantity;
+          } else {
+            current = item.price * (1 - item.discount) * item.quantity;
+          }
+          return current + sum;
+        }
+        const total = orderItems.reduce(reducer, 0).toFixed(2);
+        // console.log(total);
 
         // Insert order data
         const [orderResult] = await connection.query("INSERT INTO orders (user_id, total) VALUES (?, ?)", [userId, total]);
@@ -41,6 +54,7 @@ async function getOrderDetails(orderId) {
             oi.product_id,
             p.bookTitle,
             p.priceTag,
+            p.discount,
             oi.quantity
         FROM order_items AS oi
         JOIN books AS p ON oi.product_id = p.id

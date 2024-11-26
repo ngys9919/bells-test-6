@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'wouter';
 import { useLoginUsername } from './UserStore';
 import { useCart } from './CartStore';
+import { Link, useLocation } from 'wouter';
 
 function Navbar() {
+  const { getLoginUsername } = useLoginUsername();
+
+  const loginUsername = getLoginUsername();
+
+  // console.log(loginUsername);
+
   const [isNavbarShowing, setIsNavbarShowing] = useState(false);
   // returns the current URL
   const [location, setLocation] = useLocation();
@@ -17,21 +23,24 @@ function Navbar() {
   const handleButtonClick = () => {
     setShowDropdown(!showDropdown);
   };
-  
-  const { getLoginUsername } = useLoginUsername();
-
-  const loginUsername = getLoginUsername();
 
   let url;
 
+  let y = document.getElementById("loginlogout");
+  if ((loginUsername === "Guest") || (loginUsername === "null")) {    
+    if (y)
+      y.innerHTML = "Login";
+  } else {
+    if (y)
+      y.innerHTML = "Logout";
+  }
+
   const isActiveLink = () => {
     console.log(loginUsername);
-    if (loginUsername === "Guest") {
+    if ((loginUsername === "Guest") || (loginUsername === "null")) {
       url = "/login";
-      // document.getElementById("loginlogout").innerHTML = "Login";
     } else {
       url = "/logout";
-      // document.getElementById("loginlogout").innerHTML = "Logout";
     }
     
     if (location == url) {
@@ -43,9 +52,32 @@ function Navbar() {
 
   const handleCartBtnClick = () => {
     setLocation('/cart');
+    // <Link href="/cart"></Link>
   }
 
   const { cart } = useCart();
+
+  const spacing = 1;
+
+  const loginlogoutClick = () => {
+    if ((loginUsername === "Guest") || (loginUsername === "null")) {
+      // login
+      setLocation('/login');
+    } else {
+      // logout
+      if (cart.length !== 0) {
+        if (confirm("Are you sure? You still have shopping cart not yet checkout!")) {
+          console.log("logout: You pressed OK!");
+          setLocation('/logout');
+        } else {
+          console.log("logout: You pressed Cancel!");
+          setLocation('/cart');
+        }       
+      } else {
+        setLocation('/logout');  
+      }
+    }
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -124,9 +156,10 @@ function Navbar() {
               {/* <Link href={`${loginUsername === 'Guest' ?  "/login" : "/logout"}`} className={`nav-link ${location === '/login' ? 'active' : ''}`} id="loginlogout">
                 Login
               </Link> */}
-              <Link href={`${loginUsername === 'Guest' ?  "/login" : "/logout"}`} className={isActiveLink()} id="loginlogout">
-                Login
-              </Link>
+              {/* <Link href={`${((loginUsername === "Guest") || (loginUsername === "null")) ?  "/login" : "/logout"}`} className={isActiveLink()} id="loginlogout" onClick={loginlogoutClick}> */}
+                {/* Login */}
+              {/* </Link> */}
+              <Link href="#" className={isActiveLink()} id="loginlogout" onClick={loginlogoutClick}></Link>
             </li>
           {/* <li className="nav-item">
               <Link href="/cart" className={`nav-link ${location === '/cart' ? 'active' : ''}`}>
@@ -141,9 +174,9 @@ function Navbar() {
         <span className="badge bg-dark text-white ms-1 rounded-pill">{cart.reduce((total, item) => total + item.quantity, 0)}</span>
     </button>
 </form>
-
-          
+<span style={{ marginLeft: spacing + 'em'}} className="bg-dark text-white me-1 mb-2 mb-lg-0">&emsp;{loginUsername}&emsp;</span>  
         </div>
+        
       </div>
     </nav>
   );

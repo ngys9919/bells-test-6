@@ -38,14 +38,16 @@ function RegisterPage() {
       // const response = await axios.post(`http://localhost:3000/api/users/register`, values);
       console.log('Registration successful:', response.data);
       showMessage('Registration successful!', 'success');
+      setLocation('/login');
     } catch (error) {
       console.error('Registration failed:', error.response?.data || error.message);
       showMessage('Registration failed. Please try again.', 'error');
+      setLocation('/register');
     } finally {
       formikHelpers.setSubmitting(false);
       // The setLocation hook allows us to use wouter to change the current route.
       // go back to the "/" route
-      setLocation('/');
+      // setLocation('/');
     }
   };
 

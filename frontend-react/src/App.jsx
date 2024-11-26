@@ -11,12 +11,14 @@ import { useFlashMessage } from './FlashMessageStore';
 // make sure to import `UserLogin.jsx` after the other imports
 import UserLogin from "./UserLogin";
 import UserLogout from "./UserLogout";
+
 // Core theme CSS (includes Bootstrap)
 import './startbootstrap.css';
 // our own style sheet
 import './styles.css';
 
 function App() {
+
   const { getMessage, clearMessage  } = useFlashMessage();
   const flashMessage = getMessage();
 
