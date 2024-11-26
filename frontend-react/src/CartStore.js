@@ -29,7 +29,22 @@ export const useCart = () => {
   
   // Function to calculate the total price of items in the cart
   const getCartTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
+    let current = 0; 
+    let reducer = function(total, item) {
+      const price = item.price;
+      const discount = item.price * (1 - item.discount);
+      if (discount === price) {
+        current = item.price * item.quantity;
+      } else {
+        current = item.price * (1 - item.discount) * item.quantity;
+      }
+      return current + total;
+    }
+    let sum = cart.reduce(reducer, 0);
+    // console.log(sum);
+
+    return sum.toFixed(2);
+    // return cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
   };
 
   const addToCart = (product) => {

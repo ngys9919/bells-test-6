@@ -30,8 +30,11 @@ function ProductsPopularPage() {
               <ProductCard
                 id={product.id}
                 imageUrl={product.image}
+                promotionName={product.promotion}
                 productName={product.bookTitle}
+                productBadge={product.badge}
                 price={product.priceTag.toFixed(2)}
+                discount={(product.priceTag * (1 - product.discount)).toFixed(2)}
                 description={product.isbn_13}
                 category={product.format}
               />

@@ -7,7 +7,10 @@
       "pageCount":384,
       "priceTag": 30.16,
       "image": "https://ucarecdn.com/cd92181b-4293-488c-bdf5-ac30a30e5484/amazonlincolnchild1deepstorm.jpg",
-      "format": "Hardcover"
+      "format": "Hardcover",
+      "promotion": "Popular Item",
+      "badge": "",
+      "discount": 0
     },
     {
       "id": 5,
@@ -17,7 +20,10 @@
       "pageCount": 400,
       "priceTag": 17.83,
       "image": "https://ucarecdn.com/def6f109-87d1-4a54-9724-eda51bce2557/amazonlincolnchild4theforgottenroom.jpg",
-      "format":"Mass Market Paperback"
+      "format":"Mass Market Paperback",
+      "promotion": "Popular Item",
+      "badge": "",
+      "discount": 0
     },
     {
       "id": 6,
@@ -27,7 +33,10 @@
       "pageCount":336,
       "priceTag": 21.80,
       "image": "https://ucarecdn.com/5a21c6da-34b4-4bfe-a5b1-d34e95ed895d/amazonlincolnchild6chrysalis.jpg",
-      "format": "Paperback"
+      "format": "Paperback",
+      "promotion": "Popular Item",
+      "badge": "",
+      "discount": 0
     }
   ]
   

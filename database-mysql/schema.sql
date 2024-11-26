@@ -20,6 +20,9 @@ CREATE TABLE books (
   priceTag DECIMAL(10, 2) NOT NULL,
   image VARCHAR(255) NOT NULL,
   format TEXT NOT NULL,
+  promotion TEXT NULL,
+  badge TEXT NULL,
+  discount DECIMAL(3, 2) NULL,
   author_id INT,
   FOREIGN KEY (author_id) REFERENCES authors(id)
 );

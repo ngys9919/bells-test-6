@@ -101,7 +101,16 @@ const ShoppingCart = () => {
                     <button className="btn btn-sm btn-danger ms-2" onClick={() => removeFromCart(item.product_id)} disabled={isUpdating}>Remove</button>
                   </div>
                 </div>
-                <span>${(item.price * item.quantity).toFixed(2)}</span>
+                {item.discount === parseFloat(0) ? (
+                  <>
+                  <span>${(item.price * item.quantity).toFixed(2)}</span>
+                  </>
+                ) : (
+                  <>
+                  <span>${(item.price * (1 - item.discount) * item.quantity).toFixed(2)}</span>
+                  </>
+                )}
+                {/* <span>${(item.price * item.quantity).toFixed(2)}</span> */}
               </li>
             ))}
           </ul>

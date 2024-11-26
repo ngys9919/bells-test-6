@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useLoginUsername } from './UserStore';
+import { useCart } from './CartStore';
 
 function Navbar() {
   const [isNavbarShowing, setIsNavbarShowing] = useState(false);
@@ -43,6 +44,8 @@ function Navbar() {
   const handleCartBtnClick = () => {
     setLocation('/cart');
   }
+
+  const { cart } = useCart();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -135,7 +138,7 @@ function Navbar() {
     <button className="btn btn-outline-dark" type="submit" onClick={handleCartBtnClick}>
         <i className="bi-cart-fill me-1"></i>
         Cart
-        <span className="badge bg-dark text-white ms-1 rounded-pill">0</span>
+        <span className="badge bg-dark text-white ms-1 rounded-pill">{cart.reduce((total, item) => total + item.quantity, 0)}</span>
     </button>
 </form>
 
