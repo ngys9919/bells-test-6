@@ -15,6 +15,87 @@ const ProductCard = (props) => {
     setLocation('/cart');
   }
 
+  const renderProductPromotion = (promotion) => {
+    let productPromotion = <></>;
+    if (promotion === "Sale Item") {
+      productPromotion = (
+        <>
+          <h5 className="fw-bolder bg-danger">{props.promotionName}</h5>
+        </>
+      );
+    } else if (promotion === "Special Item") {
+      productPromotion = (
+        <>
+          <h5 className="fw-bolder bg-success">{props.promotionName}</h5>
+        </>
+      );  
+    } else if (promotion === "New Arrivals") {
+      productPromotion = (
+        <>
+          <h5 className="fw-bolder bg-info">{props.promotionName}</h5>
+        </>
+      );  
+    } else {
+      productPromotion = (
+        <>
+          <h5 className="fw-bolder bg-primary">{props.promotionName}</h5>
+        </>
+      );
+    }
+    return productPromotion;
+  };
+
+  const renderProductReview = (review) => {
+    let productReview = <></>;
+    if (review === 5) {
+      productReview = (
+        <>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        </>
+      );
+    } else if (review === 4) {
+      productReview = (
+        <>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        </>
+      );  
+    } else if (review === 3) {
+      productReview = (
+        <>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        </>
+      );
+    } else if (review === 2) {
+      productReview = (
+        <>
+        <div className="bi-star-fill"></div>
+        <div className="bi-star-fill"></div>
+        </>
+      );
+    } else if (review === 1) {
+      productReview = (
+        <>
+        <div className="bi-star-fill"></div>
+        </>
+      );
+    } else {
+        productReview = (
+          <>
+          </>
+        );
+    }
+    return productReview;
+  };
+
   return (
     // <div className="card">
     //   <img
@@ -42,15 +123,12 @@ const ProductCard = (props) => {
         <div className="card-body p-4">
           <div className="text-center">
             {/* Product name */}
-            <h5 className="fw-bolder">{props.promotionName}</h5>
+            {renderProductPromotion(props.promotionName)}
+            {/* <h5 className="fw-bolder bg-primary">{props.promotionName}</h5> */}
             <h5 className="fw-bolder">{props.productName}</h5>
-            {/* Product reviews */}
+            {/* Product reviews */} 
             <div className="d-flex justify-content-center small text-warning mb-2">
-              <div className="bi-star-fill"></div>
-              <div className="bi-star-fill"></div>
-              <div className="bi-star-fill"></div>
-              <div className="bi-star-fill"></div>
-              <div className="bi-star-fill"></div>
+              {renderProductReview(props.review)}
             </div>
             {/* Product price */}
             {props.discount === props.price ? (

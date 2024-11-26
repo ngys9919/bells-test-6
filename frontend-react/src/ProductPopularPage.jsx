@@ -37,6 +37,7 @@ function ProductsPopularPage() {
                 discount={(product.priceTag * (1 - product.discount)).toFixed(2)}
                 description={product.isbn_13}
                 category={product.format}
+                review={product.review}
               />
             </div>
           ))}

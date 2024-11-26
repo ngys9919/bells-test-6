@@ -44,6 +44,7 @@ function HomePage() {
             productBadge={product.badge}
             price={product.priceTag.toFixed(2)}
             discount={(product.priceTag * (1 - product.discount)).toFixed(2)}
+            review={product.review}
           />
         </div>
       );
@@ -60,7 +61,7 @@ function HomePage() {
         <div className="text-center text-white">
             <h1 className="display-4 fw-bolder">Hello, {loginUsername}! <br></br> Welcome to e-BookStore</h1>
             <p className="lead fw-normal text-white-50 mb-0">Find your favourite titles at wholesale prices!</p>
-            <Link href="/products" className="btn btn-light btn-lg">
+          <Link href="/products" className="btn btn-light btn-lg">
             Shop Now
           </Link>
         </div>

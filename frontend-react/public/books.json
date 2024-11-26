@@ -10,7 +10,8 @@
       "format": "Paperback",
       "promotion": "",
       "badge": "",
-      "discount": 0
+      "discount": 0,
+      "review": 4
     },
     {
       "id": 2,
@@ -23,7 +24,8 @@
       "format":"Paperback",
       "promotion": "Special Item",
       "badge": "Sale",
-      "discount": 0.15
+      "discount": 0.15,
+      "review": 3
     },
     {
       "id": 3,
@@ -36,7 +38,8 @@
       "format":"Mass Market Paperback",
       "promotion": "Sale Item",
       "badge": "Sale",
-      "discount": 0.2
+      "discount": 0.2,
+      "review": 5
     },
     {
       "id": 4,
@@ -49,7 +52,8 @@
       "format": "Hardcover",
       "promotion": "Popular Item",
       "badge": "",
-      "discount": 0
+      "discount": 0,
+      "review": 2
     },
     {
       "id": 5,
@@ -62,7 +66,8 @@
       "format":"Mass Market Paperback",
       "promotion": "Popular Item",
       "badge": "",
-      "discount": 0
+      "discount": 0,
+      "review": 0
     },
     {
       "id": 6,
@@ -75,7 +80,8 @@
       "format": "Paperback",
       "promotion": "Popular Item",
       "badge": "",
-      "discount": 0
+      "discount": 0,
+      "review": 5
     }
   ]
   

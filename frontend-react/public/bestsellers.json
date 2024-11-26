@@ -10,7 +10,8 @@
       "format": "Paperback",
       "promotion": "",
       "badge": "",
-      "discount": 0
+      "discount": 0,
+      "review": 4
     },
     {
       "id": 3,
@@ -23,7 +24,8 @@
       "format":"Mass Market Paperback",
       "promotion": "Sale Item",
       "badge": "Sale",
-      "discount": 0.2
+      "discount": 0.2,
+      "review": 5
     }
   ]
   

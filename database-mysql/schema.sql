@@ -23,6 +23,7 @@ CREATE TABLE books (
   promotion TEXT NULL,
   badge TEXT NULL,
   discount DECIMAL(3, 2) NULL,
+  review INT UNSIGNED NULL,
   author_id INT,
   FOREIGN KEY (author_id) REFERENCES authors(id)
 );
