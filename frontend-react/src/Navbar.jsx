@@ -36,7 +36,7 @@ function Navbar() {
   }
 
   const isActiveLink = () => {
-    console.log(loginUsername);
+    // console.log(loginUsername);
     if ((loginUsername === "Guest") || (loginUsername === "null")) {
       url = "/login";
     } else {

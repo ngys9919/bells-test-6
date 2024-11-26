@@ -42,12 +42,38 @@ function RegisterPage() {
     } catch (error) {
       console.error('Registration failed:', error.response?.data || error.message);
       showMessage('Registration failed. Please try again.', 'error');
-      setLocation('/register');
+      alert('Registration failed: ' + error.response.data.message);
+      // formikHelpers.resetForm({
+      //   values: 
+      //   {
+      //   name: values.name,
+      //   email: '',
+      //   password: values.password,
+      //   confirmPassword: values.confirmPassword,
+      //   salutation: values.salutation,
+      //   marketingPreferences: values.marketingPreferences,
+      //   country: values.country
+      //   }
+      // });
+      // setLocation('/register');
     } finally {
       formikHelpers.setSubmitting(false);
       // The setLocation hook allows us to use wouter to change the current route.
       // go back to the "/" route
       // setLocation('/');
+    }
+  };
+
+  const handleReset = (values, formikHelpers) => {
+    // if (confirm('Reset?')) {
+    //   console.log("resetForm: You pressed OK!");
+    // } else {
+    //   console.log("resetForm: You pressed Cancel!");
+    // }
+    console.log('Reset registration form!');
+    showMessage('Reset registration form!', 'info');
+    if (!confirm('Reset?')) {
+      throw new Error('Cancel reset');
     }
   };
 
@@ -58,6 +84,7 @@ function RegisterPage() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
+        onReset={handleReset}
       >
         {(formik) => (
           <Form>
@@ -190,11 +217,24 @@ function RegisterPage() {
 
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary me-2"
               disabled={formik.isSubmitting}
             >
               Register
             </button>
+            {/* This works, used with onReset={handleReset}! */}
+            <button type="reset" className="btn btn-primary" disabled={formik.isSubmitting}>Reset Form</button>
+            {/* This wont work, although it has confirmation dialog! */} 
+            {/* <button type="button" className="btn btn-primary" disabled={formik.isSubmitting} onClick={() => handleReset()}>Reset</button> */}
+            {/* This works, without using onReset={handleReset}! */}
+            {/* <button 
+              type="button" 
+              className="btn btn-primary me-2" 
+              disabled={formik.isSubmitting} 
+              onClick={formik.handleReset}
+            >
+              Reset
+            </button> */}
           </Form>
         )}
       </Formik>
