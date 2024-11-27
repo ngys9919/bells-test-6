@@ -55,20 +55,42 @@ function HomePage() {
     return productElements;
   };
 
+  // class HomePage extends Component {
+  // render() {
+  //   const myStyle = {
+  //       backgroundImage:
+  //           "url('https://media.geeksforgeeks.org/wp-content/uploads/rk.png')",
+  //       height: "100vh",
+  //       marginTop: "-70px",
+  //       fontSize: "50px",
+  //       backgroundSize: "cover",
+  //       backgroundRepeat: "no-repeat",
+  //   };
+  //   return (
+  //     <div style={myStyle}>
+  //         <h1> geeksforgeeks </h1>
+  //     </div>
+  // );
+// }
+// }
+
   return (
     <>
 
       {/* Header */}
-<header className="bg-dark py-5">
-    <div className="container px-4 px-lg-5 my-5">
-        <div className="text-center text-white">
+<header className="bg-light py-5">
+  <div className="background">
+    {/* <div className="container px-4 px-lg-5 my-5"> */}
+    <div className="container">
+        <div className="text-center text-info">
             <h1 className="display-4 fw-bolder">Hi, {loginUsername}! <br></br> Welcome to e-BookStore</h1>
-            <p className="lead fw-normal text-white-50 mb-0">Find your favourite titles at wholesale prices!</p>
-          <Link href="/products" className="btn btn-light btn-lg">
+            <p className="lead fw-normal text-dark mb-0"><strong>Find your favourite titles at wholesale prices!</strong></p>
+          <Link href="/products" className="btn btn-primary btn-lg">
             Shop Now
           </Link>
         </div>
     </div>
+  </div>
 </header>
 
       <main className="container my-5">
