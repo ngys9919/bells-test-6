@@ -3,6 +3,7 @@ import { useCart } from './CartStore';
 import { Link, useLocation } from 'wouter';
 import { useFlashMessage } from './FlashMessageStore';
 import { useLoginUsername } from './UserStore';
+import { useItem } from './ItemStore';
 
 const ProductCard = (props) => {
 
@@ -13,6 +14,8 @@ const ProductCard = (props) => {
   const { getLoginUsername } = useLoginUsername();
 
   const loginUsername = getLoginUsername();
+
+  const { setItemContent } = useItem();
 
   const handleAddToCart = () => {
     if ((loginUsername === "Guest") || (loginUsername === "null")) {
@@ -25,6 +28,12 @@ const ProductCard = (props) => {
       setLocation('/cart');
       // <Link href="/cart"></Link>
     }    
+  }
+
+  const handleViewOptions = () => {
+    // setItemContent(props);
+    setLocation('/items');
+    // <Link href="/items"></Link> 
   }
 
   const renderProductPromotion = (promotion) => {
@@ -153,9 +162,15 @@ const ProductCard = (props) => {
           </div>
         </div>
         {/* Product actions */}
-        <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-          <div className="text-center"><a className="btn btn-outline-dark mt-auto" href="#" onClick={handleAddToCart}>Add to cart</a></div>
-        </div>
+        {props.review === 5 ? (
+          <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div className="text-center"><a className="btn btn-outline-dark mt-auto" href="#" onClick={handleViewOptions}>View options</a></div>
+          </div>
+        ) : (
+          <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div className="text-center"><a className="btn btn-outline-dark mt-auto" href="#" onClick={handleAddToCart}>Add to cart</a></div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -83,6 +83,20 @@ export const useCart = () => {
     });
   }
 
+  const addQuantityToCart = (product, quantity) => {
+    setCart((currentCart) => {
+      const existingItemIndex = currentCart.findIndex(item => item.product_id === product.id);
+      const newQuantity = quantity;
+      if (existingItemIndex !== -1) {
+        // Use setIn to update quantity immutably
+        return currentCart.setIn([existingItemIndex, 'quantity'], newQuantity);
+      } else {
+        // Use concat to add a new item immutably
+        return currentCart.concat({ ...product, product_id: product.id, quantity: newQuantity });
+      }
+    });
+  };
+
   const setCartContent = (cartItems) => {
     setCart(Immutable(cartItems));
   }
@@ -98,6 +112,7 @@ export const useCart = () => {
     modifyQuantity,
     removeFromCart,
     setCartContent,
-    resetCartContent
+    resetCartContent,
+    addQuantityToCart
   };
 };
