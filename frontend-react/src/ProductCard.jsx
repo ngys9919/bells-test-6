@@ -15,7 +15,7 @@ const ProductCard = (props) => {
 
   const loginUsername = getLoginUsername();
 
-  const { setItemContent } = useItem();
+  const { setItemContent, resetItemContent } = useItem();
 
   const handleAddToCart = () => {
     if ((loginUsername === "Guest") || (loginUsername === "null")) {
@@ -31,7 +31,9 @@ const ProductCard = (props) => {
   }
 
   const handleViewOptions = () => {
-    // setItemContent(props);
+    resetItemContent();
+    // console.log(props);
+    setItemContent(props);
     setLocation('/items');
     // <Link href="/items"></Link> 
   }

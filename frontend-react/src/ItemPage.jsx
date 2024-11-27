@@ -12,9 +12,11 @@ function ItemsPage() {
   const { addQuantityToCart } = useCart();
 
   const { showMessage } = useFlashMessage();
-  const [items, setItems] = useState([]);
+  const [relatedItems, setRelatedItems] = useState([]);
 
   const { itemArray } = useItem();
+
+  // console.log(itemArray);
 
   const [, setLocation] = useLocation();
 
@@ -23,20 +25,21 @@ function ItemsPage() {
   const loginUsername = getLoginUsername();
 
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchRelatedItems = async () => {
       try {
         const response = await axios.get('/related.json');
         // const response = await axios.get('/products.json');
         // const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
         // const response = await axios.get(`http://localhost:3000/api/products`);
-        setItems(response.data);
+        console.log('Items:', response.data);
+        setRelatedItems(response.data);
       } catch (error) {
         console.error('Error fetching items:', error);
         showMessage('Error fetching items!', 'error');
       }
     };
   
-    fetchItems();
+    fetchRelatedItems();
   }, []);
 
   const handleAddToCart = () => {
@@ -65,7 +68,23 @@ function ItemsPage() {
         <>
         {/* Item section */}
       <section className="py-5">
+        {/* This is using props naming format, see HomePage.jsx */}
       <ul className="list-group">
+            {itemArray.map((item) => (
+              <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
+        <div className="container px-4 px-lg-5 my-5">
+          <div className="row gx-4 gx-lg-5 align-items-center">
+            <div className="col-md-6"><img className="card-img-left mb-5 mb-md-0" src={item.imageUrl} alt={item.productName} /></div>
+            <div className="col-md-6">
+              <div className="small mb-1">ISBN: {item.isbn_13}</div>
+              <h1 className="display-5 fw-bolder">{item.productName}</h1>
+              <div className="fs-5 mb-5">
+                <span className="text-decoration-line-through">{item.price}</span>
+                <span>${item.discount}</span>
+              </div>
+              <p className="lead">Page Count: {item.pageCount} <br></br> Format: {item.format}</p>
+      {/* This is using json naming format */}
+      {/* <ul className="list-group">
             {itemArray.map((item) => (
               <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
         <div className="container px-4 px-lg-5 my-5">
@@ -78,7 +97,7 @@ function ItemsPage() {
                 <span className="text-decoration-line-through">{item.priceTag}</span>
                 <span>${(item.priceTag * (1 - item.discount)).toFixed(2)}</span>
               </div>
-              <p className="lead">Page Count: {item.pageCount} <br></br> Format: {item.format}</p>
+              <p className="lead">Page Count: {item.pageCount} <br></br> Format: {item.format}</p> */}
               <div className="d-flex">
                 <input className="form-control text-center me-3" id="inputQuantity" type="num" value={inputQuantity} style={{width: '3rem'}}  onChange={updateInputQuantity}/>
                 <button className="btn btn-outline-dark flex-shrink-0" type="button" onClick={handleAddToCart}>
@@ -105,7 +124,7 @@ function ItemsPage() {
           <h2 className="fw-bolder mb-4">Related products</h2>
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
       <div className="row">
-          {items.map(product => (
+          {relatedItems.map(product => (
             <div key={product.id} className="col-md-4 mb-4">
               <ItemCard
                 id={product.id}
@@ -115,9 +134,10 @@ function ItemsPage() {
                 productBadge={product.badge}
                 price={product.priceTag.toFixed(2)}
                 discount={(product.priceTag * (1 - product.discount)).toFixed(2)}
-                description={product.isbn_13}
-                category={product.format}
                 review={product.review}
+                isbn_13={product.isbn_13}
+                pageCount={product.pageCount}
+                format={product.format}
               />
             </div>
           ))}

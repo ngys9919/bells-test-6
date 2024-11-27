@@ -38,9 +38,10 @@ function ProductsPage() {
                 productBadge={product.badge}
                 price={product.priceTag.toFixed(2)}
                 discount={(product.priceTag * (1 - product.discount)).toFixed(2)}
-                description={product.isbn_13}
-                category={product.format}
                 review={product.review}
+                isbn_13={product.isbn_13}
+                pageCount={product.pageCount}
+                format={product.format}
               />
             </div>
           ))}

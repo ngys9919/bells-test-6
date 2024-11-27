@@ -3,6 +3,7 @@ import { useCart } from './CartStore';
 import { Link, useLocation } from 'wouter';
 import { useFlashMessage } from './FlashMessageStore';
 import { useLoginUsername } from './UserStore';
+import { useItem } from './ItemStore';
 
 const ItemCard = (props) => {
 
@@ -13,6 +14,8 @@ const ItemCard = (props) => {
   const { getLoginUsername } = useLoginUsername();
 
   const loginUsername = getLoginUsername();
+
+  const { setItemContent } = useItem();
 
   const handleAddToCart = () => {
     if ((loginUsername === "Guest") || (loginUsername === "null")) {
@@ -28,8 +31,12 @@ const ItemCard = (props) => {
   }
 
   const handleViewOptions = () => {
+    // resetItemContent();
+    // clearItem();
+    // console.log(props);
+    setItemContent(props);
     setLocation('/items');
-    // <Link href="/items"></Link> 
+    // <Link href="/items"></Link>  
   }
 
   const renderProductPromotion = (promotion) => {
