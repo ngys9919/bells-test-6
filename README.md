@@ -266,7 +266,14 @@ It is not deployed.
 
 <!-- Heading level 3 -->
 ### Existing Features
+The user interface is provided by React frontend framework. The content is done up with a mix of JSX (JavaScript Syntax Extension) and HTML markup language whilst the style for the website is beautified with CSS stylesheets. The full-stack development cycle should begin with database design, followed by frontend and finally the backend. The backend is developed using layered architecture, that is separation of concern for data access layer (which interacts with database system via SQL commands) and service layer (which contains the business logic). The frontend is developed using reuseable components, state management (like Jotai), immutable (like seamless-immutable), form validation (like Yup) and build forms (like Formik), routing support (like wouter), http and file support (like axios) and lastly local storage.
 
+Index page:
+1. Home - to startup landing page with featured products like Best-Seller Books
+2. Shop (dropdown menu) - to further select All Products, Popular Items and New Arrivals
+3. Register - to register a new user with provided info like Name, Email, Password, Confirm Password, Salutation, Marketing Preferences and Country
+4. Login - to login with Email and Password, it is secured via JWT (Json Web Token) which is transparent to the user 
+5. Cart - to show Shopping Cart with the items marked for Add to cart with quantity (adjust with + and -) and total price, it also has a checkout button which leads to Stripe interface for card payment
 
 
 <!-- Heading level 3 -->
