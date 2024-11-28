@@ -24,7 +24,7 @@ async function createProductByBody(isbn_10, isbn_13, bookTitle, pageCount, price
 
 async function updateProductByIdBody(id, isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, firstName, lastName) {
   const product = await productData.updateProductByIdBody(id, isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, firstName, lastName);
-  if (!product.matchedCount == 0) {
+  if (!product) {
     throw new Error('Product not found');
   }
   // todo: check for promotion, special business logic (region blocking) etc.
@@ -33,7 +33,7 @@ async function updateProductByIdBody(id, isbn_10, isbn_13, bookTitle, pageCount,
 
 async function deleteProductById(id) {
   const product = await productData.deleteProductById(id);
-  if (product.deletedCount == 0) {
+  if (!product) {
     throw new Error('Product not found');
   }
   // todo: check for promotion, special business logic (region blocking) etc.

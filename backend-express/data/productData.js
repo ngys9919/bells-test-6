@@ -25,9 +25,13 @@ async function createProductByBody(isbn_10, isbn_13, bookTitle, pageCount, price
 
     let [authors] = await connection.query('SELECT * from authors');
 
+    // console.log(firstName);
+    // console.log(lastName);
+
     let newAuthor = false;
     let newAuthorId = null;
     for (let a of authors) {
+      // console.log(a);
       if ((a.firstName !== firstName) && (firstName != null)) {
         if (a.lastName !== lastName) {
           newAuthor = true;
@@ -39,21 +43,27 @@ async function createProductByBody(isbn_10, isbn_13, bookTitle, pageCount, price
       }
     }
 
+    // console.log(newAuthor);
+    // console.log(newAuthorId);
+
     if (newAuthor) {
       let query2 = 'INSERT INTO authors (firstName, lastName) VALUES (?, ?)';
       let bindings2 = [firstName, lastName];
       let [result2] = await connection.query(query2, bindings2);
       newAuthorId = result2.insertId;
+      // console.log(newAuthorId);
     }
 
-    let query = 'INSERT INTO books (isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, newAuthorId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    let query = 'INSERT INTO books (isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, author_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     let bindings = [isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, newAuthorId];
     let [result] = await connection.query(query, bindings);
 
-    let newEmployeeId = result.insertId;
+    let newBookId = result.insertId;
+    // console.log(newBookId);
 
     await connection.commit();
-    return newEmployeeId;
+    // return newBookId;
+    return result;
   } catch (error) {
     await connection.rollback();
     throw error;
@@ -80,17 +90,24 @@ async function updateProductByIdBody(id, isbn_10, isbn_13, bookTitle, pageCount,
     }
 
     for (let a of authors) {
+      console.log(a);
       if ((a.firstName != firstName) && (firstName != null)) {
         if (a.lastName !== lastName) {
           newAuthor = true;
         }
+      } else if ((a.firstName == firstName) && (a.lastName != lastName)) {
+          newAuthor = true;
       } else {
         newAuthor = false;
-        author_id = a.author_id;
+        author_id = a.id;
         newAuthorId = author_id;
         break;
       }
     }
+
+    // console.log(newAuthor);
+    // console.log(author_id);
+    // console.log(newAuthorId);
 
     if ((newAuthor) && (firstName != null)) {
       let query4 = 'INSERT INTO authors (firstName, lastName) VALUES (?, ?)';
@@ -98,11 +115,12 @@ async function updateProductByIdBody(id, isbn_10, isbn_13, bookTitle, pageCount,
       let [result4] = await pool.query(query4, bindings4);
       newAuthorId = result4.insertId;
     } else if (firstName != null) {
-      let query2 = 'UPDATE authors SET firstName=?, lastName=? WHERE author_id=?';
+      let query2 = 'UPDATE authors SET firstName=?, lastName=? WHERE id=?';
       let bindings2 = [firstName, lastName, author_id];
       await pool.query(query2, bindings2);
     }
 
+    // console.log(newAuthorId);
     let query = 'UPDATE books SET isbn_10=?, isbn_13=?, bookTitle=?, pageCount=?, priceTag=?, image=?, format=?, promotion=?, badge=?, discount=?, review=?, author_id=? WHERE id=?';
     let bindings = [isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, newAuthorId, id];
     const result2 = await pool.query(query, bindings);

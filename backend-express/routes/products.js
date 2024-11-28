@@ -42,9 +42,7 @@ router.post('/create', async (req, res) => {
       .json({ "error": "The field(s) is incomplete: isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, firstName, lastName" })
     }
 
-    
-
-    const product = await productService.createProductByBody(req.body);
+    const product = await productService.createProductByBody(isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, firstName, lastName);
     res.json(product);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -64,7 +62,7 @@ router.put('/:id/edit', async (req, res) => {
       .json({ "error": "The field(s) is incomplete: isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, firstName, lastName" })
     }
 
-    const product = await productService.updateProductByIdBody(req.params.id, req.body);
+    const product = await productService.updateProductByIdBody(req.params.id, isbn_10, isbn_13, bookTitle, pageCount, priceTag, image, format, promotion, badge, discount, review, firstName, lastName);
     res.json(product);
   } catch (error) {
     res.status(404).json({ message: error.message });

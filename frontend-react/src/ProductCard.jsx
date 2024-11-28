@@ -31,7 +31,7 @@ const ProductCard = (props) => {
   }
 
   const handleViewOptions = () => {
-    resetItemContent();
+    // resetItemContent();
     // console.log(props);
     setItemContent(props);
     setLocation('/items');
