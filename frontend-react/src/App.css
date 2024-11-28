@@ -38,10 +38,11 @@
 
 .background {
     background-image: url("./assets/pexels-collection-of-books-photos.jpeg");
-    background-size: "cover";
+    /* background-size: "cover"; */
     /* height: 100vh; */
     /* margin-top: -70px; */
     font-size: 100px;
     /* background-repeat: no-repeat; */
+    background-repeat: repeat;
     opacity: 0.7;
 }
