@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const productService = require('../services/productService');
+const StatusCode = require('../middleware/StatusCode');
+const logHttpUrl = require('../middleware/HttpUrl');
 
+// Apply the logHttpUrl middleware to all routes
+router.use(logHttpUrl);
+
+// Apply the StatusCode middleware to router.get route only
 // GET all products
-router.get('/', async (req, res) => {
+router.get('/', StatusCode, async (req, res) => {
   try {
     const products = await productService.getAllProducts();
     res.json(products);

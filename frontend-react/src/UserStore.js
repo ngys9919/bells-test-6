@@ -2,7 +2,8 @@ import { atom, useAtom } from 'jotai';
 
 const jwtAtom = atom(null);
 
-const usernameAtom = atom(null);
+// const usernameAtom = atom(null);
+const usernameAtom = atom("Guest");
 const previousUserAtom = atom(null);
 
 export function useLoginUsername() {
@@ -34,11 +35,12 @@ export function usePreviousLoginUser() {
   const [previousLoginUser, setPreviousLoginUserAtom] = useAtom(previousUserAtom);
 
   const getPreviousLoginUser = () => {   
-    
+    const previousLoginUser = localStorage.getItem('previousUser');
     return previousLoginUser;
   };
 
   const setPreviousLoginUser = (newLoginUsername) => {
+    localStorage.setItem('previousUser', newLoginUsername);
     setPreviousLoginUserAtom(newLoginUsername);
   };
 

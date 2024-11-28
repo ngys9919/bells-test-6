@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const userService = require('../services/userService');
 const jwt = require('jsonwebtoken');
+const logHttpUrl = require('../middleware/HttpUrl');
+
+// Apply the logHttpUrl middleware to all routes
+router.use(logHttpUrl);
 
 // POST register a new user
 router.post('/register', async (req, res) => {

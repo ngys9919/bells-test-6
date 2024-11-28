@@ -4,7 +4,12 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const orderService = require('../services/orderService');
 const checkoutService = require('../services/checkoutService');
 const UserAuth = require('../middleware/UserAuth');
+const logHttpUrl = require('../middleware/HttpUrl');
 
+// Apply the logHttpUrl middleware to all routes
+router.use(logHttpUrl);
+
+// Apply the UserAuth middleware to router.post route only
 router.post('/', UserAuth, async (req, res) => {
     try {
         const session = await checkoutService.checkout(req.user.userId);
